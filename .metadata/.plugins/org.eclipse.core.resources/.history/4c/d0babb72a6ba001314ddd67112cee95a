@@ -1,0 +1,16 @@
+import javax.swing.*;
+
+public class TestGame
+{
+	public static void main(String [] args)
+	{
+		JFrame frame = new JFrame("Test Game");
+		frame.setSize(300, 300);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		Deck deck = new Deck();
+		deck.shuffleDeck();
+		deck.printDeck();
+	}
+}

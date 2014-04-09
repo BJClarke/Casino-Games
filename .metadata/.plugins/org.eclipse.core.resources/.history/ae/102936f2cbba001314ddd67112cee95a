@@ -1,0 +1,90 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+@SuppressWarnings("serial")
+public class TestGame implements ActionListener
+{
+	JTextArea output;
+	JScrollPane scrollPane;
+	private static Deck deck;
+	
+	public static void main(String [] args)
+	{
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				runEnvironment();
+			}
+		});
+	}
+	
+	public JMenuBar setupMenu()
+	{
+		//Creates MenuBar
+		JMenuBar menubar = new JMenuBar();
+		menubar.setPreferredSize(new Dimension(200, 20));
+		
+		//Creates and Adds Command Menu
+		JMenu menu = new JMenu("Commands");
+		menubar.add(menu);
+		
+		//Creates and Adds Command Options
+		JMenuItem shuffleCommand = new JMenuItem("Shuffle Deck");
+		shuffleCommand.addActionListener(this);
+		JMenuItem displayCommand = new JMenuItem("Display Deck");
+		displayCommand.addActionListener(this);
+		menu.add(shuffleCommand);
+		menu.add(displayCommand);
+		
+		return menubar;
+	}
+	
+	public Container setupContentPane()
+	{
+		JPanel content = new JPanel(new BorderLayout());
+		
+		output = new JTextArea(5, 30);
+		output.setEditable(false);
+		scrollPane = new JScrollPane(output);
+		
+		content.add(scrollPane, BorderLayout.CENTER);
+		
+		return content;
+	}
+	
+	public void actionPerformed(ActionEvent event)
+	{
+		JMenuItem selection = (JMenuItem)(event.getSource());
+		if (selection.getText().equals("Shuffle Deck"))
+		{
+			deck.shuffleDeck();
+		}
+		else if (selection.getText().equals("Display Deck"))
+		{
+			for (int i = 0; i < deck.getDeck().size(); i++)
+			{
+				output.append(deck.getDeck().get(i).getName() + "\n");
+			}
+		}
+	}
+	
+	public static void runEnvironment()
+	{
+		//Creates Frame
+		deck = new Deck();
+		
+		JFrame frame = new JFrame("Test Game");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		TestGame game = new TestGame();
+		frame.setJMenuBar(game.setupMenu());
+		frame.setContentPane(game.setupContentPane());
+		
+		
+		frame.setSize(450, 260);
+		frame.setVisible(true);
+	}
+	
+	
+}
+

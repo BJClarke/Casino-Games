@@ -1,0 +1,51 @@
+import javax.swing.*;
+import java.awt.*;
+
+@SuppressWarnings("serial")
+public class TestGame extends JPanel
+{
+	public static void main(String [] args)
+	{
+		
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				runEnvironment();
+			}
+		});
+	}
+	
+	
+	public static void runEnvironment()
+	{
+		//Creates Frame
+		JFrame frame = new JFrame("Test Game");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		//Creates MenuBar
+		JMenuBar menubar = new JMenuBar();
+		menubar.setPreferredSize(new Dimension(200, 20));
+		
+		//Creates and Adds Command Menu
+		JMenu menu = new JMenu("Commands");
+		menubar.add(menu);
+		
+		//Creates and Adds Command Options
+		JMenuItem shuffleCommand = new JMenuItem("Shuffle Deck");
+		JMenuItem displayCommand = new JMenuItem("Display Deck");
+		menu.add(shuffleCommand);
+		menu.add(displayCommand);
+		
+		JLabel background = new JLabel();
+		background.setOpaque(true);
+		background.setPreferredSize(new Dimension(200, 180));
+		
+		frame.setJMenuBar(menubar);
+		frame.getContentPane().add(background, BorderLayout.CENTER);
+		
+		frame.pack();
+		frame.setVisible(true);
+	}
+	
+	
+}
+

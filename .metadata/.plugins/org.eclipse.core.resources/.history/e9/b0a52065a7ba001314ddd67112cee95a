@@ -1,0 +1,37 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import javax.swing.*;
+
+public class TestGame
+{
+	private Deck deck;
+	
+	public static void main(String [] args) throws IOException
+	{
+		TestGame game = new TestGame();
+		game.displayDeck();
+	}
+	
+	public void displayDeck() throws IOException
+	{
+		deck = new Deck();
+		deck.shuffleDeck();
+		BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
+		
+		JFrame frame = new JFrame("Test Game");
+		frame.setSize(300, 300);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		for (int i = 0; i < deck.getDeck().size(); i++)
+		{
+			JLabel label = new JLabel(deck.getDeck().get(i).getName());
+			label.setVerticalAlignment(0);
+			label.setHorizontalAlignment(0);
+			frame.add(label);
+			stdin.readLine();
+		}
+	}
+}

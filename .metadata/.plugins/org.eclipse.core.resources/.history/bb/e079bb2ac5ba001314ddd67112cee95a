@@ -1,0 +1,40 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class TestGame extends JPanel
+{
+	public static void main(String [] args)
+	{
+		
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				runEnvironment();
+			}
+		});
+	}
+	
+	
+	public static void runEnvironment()
+	{
+		JFrame frame = new JFrame("Test Game");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JMenuBar menu = new JMenuBar();
+		menu.setOpaque(true);
+		menu.setBackground(new Color(177, 179, 181));
+		menu.setPreferredSize(new Dimension(200, 20));
+		
+		JLabel background = new JLabel();
+		background.setOpaque(true);
+		background.setPreferredSize(new Dimension(200, 180));
+		
+		frame.setJMenuBar(menu);
+		frame.getContentPane().add(background, BorderLayout.CENTER);
+		
+		frame.pack();
+		frame.setVisible(true);
+	}
+	
+	
+}
+
