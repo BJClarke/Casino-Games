@@ -12,4 +12,5 @@ Instructions:
 5. git commit (Add descriptive title, 'enter' twice, write detailed description)
 6. esc :wq
 7. git status
-6. git push origin master
+8. git push origin master
+
