@@ -9,7 +9,7 @@ Instructions:
 2. git status
 3. git add -A
 4. git status
-5. git commit -m "(your descriptive message)"
+5. git commit or git commit -m "(your descriptive message)"
 6. esc :wq
 7. git status
 8. git push origin master
