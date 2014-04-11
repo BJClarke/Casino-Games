@@ -7,7 +7,7 @@ Instructions:
 
 1. git pull
 2. git status
-3. git add . -A
+3. git add -A
 4. git status
 5. git commit -m "(your descriptive message)"
 6. esc :wq
