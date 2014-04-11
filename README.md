@@ -3,6 +3,8 @@ Casino-Games
 
 This is ENGE L1 T5
 
+Instructions:
+
 1. git pull
 2. git status
 3. git add . -A
