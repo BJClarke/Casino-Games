@@ -19,6 +19,7 @@ public class Deck extends JPanel
 	public Deck()
 	{
 		super();
+		setOpaque(false);
 		setLayout(new OverlayLayout(this));
 		deck = new ArrayList<Card>();
 		setup();

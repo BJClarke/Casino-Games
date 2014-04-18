@@ -7,8 +7,12 @@ import java.awt.event.ActionListener;
 
 
 
+
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -27,6 +31,7 @@ public class Game extends JFrame implements ActionListener
 	private InfoPanel info;
 	private JButton dealButton, hitButton, discardButton,
 		standButton, resetButton;
+	private JLabel background;
 	
 	public static void main( String [] args )
 	{
@@ -52,6 +57,7 @@ public class Game extends JFrame implements ActionListener
 	public void setupControl()
 	{
 		control = new JPanel(new GridBagLayout());
+		control.setOpaque(false);
 		control.setBorder(new EmptyBorder(10, 10, 10, 10));
 		
 		dealButton = new JButton("Deal");
@@ -83,75 +89,93 @@ public class Game extends JFrame implements ActionListener
 		GridBagConstraints gbc_hitButton = new GridBagConstraints();
 		gbc_hitButton.insets = new Insets(0, 0, 5, 0);
 		gbc_hitButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_hitButton.gridx = 0;
-		gbc_hitButton.gridy = 1;
+		gbc_hitButton.gridx = 1;
+		gbc_hitButton.gridy = 0;
 		control.add(hitButton, gbc_hitButton);
 		
 		GridBagConstraints gbc_discardButton = new GridBagConstraints();
 		gbc_discardButton.insets = new Insets(0, 0, 5, 0);
 		gbc_discardButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_discardButton.gridx = 0;
-		gbc_discardButton.gridy = 3;
+		gbc_discardButton.gridx = 3;
+		gbc_discardButton.gridy = 0;
 		control.add(discardButton, gbc_discardButton);
 		
 		GridBagConstraints gbc_standButton = new GridBagConstraints();
 		gbc_standButton.insets = new Insets(0, 0, 5, 0);
 		gbc_standButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_standButton.gridx = 0;
-		gbc_standButton.gridy = 2;
+		gbc_standButton.gridx = 2;
+		gbc_standButton.gridy = 0;
 		control.add(standButton, gbc_standButton);
 		
 		GridBagConstraints gbc_resetButton = new GridBagConstraints();
 		gbc_resetButton.insets = new Insets(0, 0, 5, 0);
 		gbc_resetButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_resetButton.gridx = 0;
-		gbc_resetButton.gridy = 4;
+		gbc_resetButton.gridx = 4;
+		gbc_resetButton.gridy = 0;
 		control.add(resetButton, gbc_resetButton);
 	}
 	
 	public void setupContent()
 	{	
+		JPanel empty = new JPanel();
+		empty.setBorder(new EmptyBorder(94, 0, 0, 0));
+		empty.setOpaque(false);
 		player = new Player();
+		player.setBorder(new EmptyBorder(0, 0, 0, 0));
 		dealer = new Player();
+		dealer.setBorder(new EmptyBorder(0, 0, 0, 0));
 		center = new JPanel(new GridBagLayout());
+		center.setBorder(new EmptyBorder(0, 0, 0, 0));
+		center.setOpaque(false);
 		deck = new Deck();
 		deck.setBorder(new EmptyBorder(5, 5, 5, 5));
 		pile = new DiscardPile();
 		pile.setBorder(new EmptyBorder(5, 5, 5, 5));
 		info = new InfoPanel();
+		background = new JLabel(new ImageIcon(getClass().getResource("resources/background.png")));
+		
+		GridBagConstraints gbc_background = new GridBagConstraints();
+		gbc_background.gridx = 0;
+		gbc_background.gridy = 0;
+		gbc_background.gridheight = 6;
+		
+		GridBagConstraints gbc_empty = new GridBagConstraints();
+		gbc_empty.gridx = 0;
+		gbc_empty.gridy= 0;
 		
 		GridBagConstraints gbc_info = new GridBagConstraints();
 		gbc_info.gridx = 0;
-		gbc_info.gridy = 0;
-		gbc_info.gridheight = 3;
+		gbc_info.gridy = 1;
 		
 		GridBagConstraints gbc_dealer = new GridBagConstraints();
-		gbc_dealer.gridx = 1;
-		gbc_dealer.gridy = 0;
+		gbc_dealer.gridx = 0;
+		gbc_dealer.gridy = 2;
 		
 		GridBagConstraints gbc_center = new GridBagConstraints();
-		gbc_center.gridx = 1;
-		gbc_center.gridy = 1;
+		gbc_center.gridx = 0;
+		gbc_center.gridy = 3;
 		
 		GridBagConstraints gbc_player = new GridBagConstraints();
-		gbc_player.gridx = 1;
-		gbc_player.gridy = 2;
+		gbc_player.gridx = 0;
+		gbc_player.gridy = 4;
 		
 		GridBagConstraints gbc_control = new GridBagConstraints();
-		gbc_control.gridx = 2;
-		gbc_control.gridy = 0;
-		gbc_control.gridheight = 3;
+		gbc_control.anchor = GridBagConstraints.NORTH;
+		gbc_control.gridx = 0;
+		gbc_control.gridy = 5;
 		
 		dealer.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		center.add(deck);
 		center.add(pile);
 		info.update(deck, player);
 		
+		getContentPane().add(empty, gbc_empty);
 		getContentPane().add(center, gbc_center);
 		getContentPane().add(dealer, gbc_dealer);
 		getContentPane().add(player, gbc_player);
 		getContentPane().add(info, gbc_info);
 		getContentPane().add(control, gbc_control);
+		getContentPane().add(background, gbc_background);
 	}
 	
 	public void deal()

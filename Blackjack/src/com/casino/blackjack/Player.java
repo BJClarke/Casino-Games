@@ -16,6 +16,7 @@ public class Player extends JPanel
 	{
 		super();
 		hand = new ArrayList<Card>();
+		setOpaque(false);
 		refreshImage();
 	}
 	
