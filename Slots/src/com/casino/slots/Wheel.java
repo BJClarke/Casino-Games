@@ -4,14 +4,11 @@ import java.util.Random;
 
 public class Wheel {
 
-	Image type;
+	private Symbol type;
 
-	private enum Image {
-		A, B, C, D, E,
-	}
-
-	public Wheel() {
-		type = null;
+	public Wheel() 
+	{
+		type = new Symbol();
 	}
 
 	/**
@@ -23,19 +20,19 @@ public class Wheel {
 
 		if (x < 10) // 10% chance
 		{
-			type = Image.A;
+			type.setID(1);
 		} else if (x < 25) // 15% chance
 		{
-			type = Image.B;
+			type.setID(2);
 		} else if (x < 45) // 20% chance
 		{
-			type = Image.C;
+			type.setID(3);
 		} else if (x < 70) // 25% chance
 		{
-			type = Image.D;
+			type.setID(4);
 		} else // 30% chance
 		{
-			type = Image.E;
+			type.setID(5);
 		}
 	}
 
@@ -44,8 +41,8 @@ public class Wheel {
 	 * 
 	 * @return type the type of the wheel aka the image on it
 	 */
-	public Image getType() {
-		return type;
+	public int getType() {
+		return type.getID();
 
 	}
 }
