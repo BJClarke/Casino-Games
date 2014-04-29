@@ -27,6 +27,21 @@ public class Deck extends JPanel
 		refreshImage();
 	}
 	
+	public Deck(boolean testDeck)
+	{
+		super();
+		setOpaque(false);
+		setLayout(new OverlayLayout(this));
+		deck = new ArrayList<Card>();
+		setup();
+		deck.add(new Card(42, false));
+		deck.add(new Card(11, false));
+		deck.add(new Card(33, false));
+		deck.add(new Card(25, false));
+		deck.add(new Card(6, false));
+		refreshImage();
+	}
+	
 	public void setup()
 	{
 		for (int i = 51; i >= 0; i--)

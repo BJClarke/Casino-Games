@@ -11,12 +11,27 @@ import javax.swing.JPanel;
 public class Player extends JPanel
 {
 	private List<Card> hand;
+	private int total;
+	private int money;
+	private String name;
 	
 	public Player()
 	{
 		super();
 		hand = new ArrayList<Card>();
 		setOpaque(false);
+		resetTotal();
+		refreshImage();
+	}
+	
+	public Player(int money, String name)
+	{
+		super();
+		this.money = money;
+		this.name = name;
+		hand = new ArrayList<Card>();
+		setOpaque(false);
+		resetTotal();
 		refreshImage();
 	}
 	
@@ -49,28 +64,71 @@ public class Player extends JPanel
 		refreshImage();
 	}
 	
-	public int calculateTotal()
+	public void changeAce()
 	{
-		int total = 0;
 		for (int i = 0; i < hand.size(); i++)
 		{
-			total += hand.get(i).getValue();
+			if (hand.get(i).getValue() == 11)
+			{
+				hand.get(i).setValue(1);
+				break;
+			}
+		}
+	}
+	
+	public int calculateTotal()
+	{
+		total = 0;
+		for (int i = 0; i < hand.size(); i++)
+		{
+			total+= hand.get(i).getValue();
 		}
 		return total;
 	}
 	
 	public boolean checkBust()
 	{
-		int total = 0;
-		for (int i = 0; i < hand.size(); i++)
-		{
-			total += hand.get(i).getValue();
-		}
-		return total > 21;
+		return getTotal() > 21;
+	}
+	
+	public void resetTotal()
+	{
+		total = 0;
 	}
 	
 	public List<Card> getHand()
 	{
 		return hand;
+	}
+	
+	public int getTotal()
+	{
+		calculateTotal();
+		if (total > 21)
+		{
+			changeAce();
+			calculateTotal();
+		}
+		return total;
+	}
+	
+	public int getMoney()
+	{
+		return money;
+	}
+	
+	public void addMoney(int moreMoney)
+	{
+		money += moreMoney;
+	}
+	
+	public void placeBet(int bet)
+	{
+		money -= bet;
+	}
+	
+	public String getName()
+	{
+		return name;
 	}
 }

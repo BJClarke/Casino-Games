@@ -67,6 +67,11 @@ public class Card extends JLabel
 		return value;
 	}
 	
+	public void setValue(int value)
+	{
+		this.value = value;
+	}
+	
 	public boolean getOrientation()
 	{
 		return faceUp;

@@ -10,15 +10,18 @@ import javax.swing.border.EmptyBorder;
 @SuppressWarnings("serial")
 public class InfoPanel extends JPanel
 {
-	
+	private Blackjack game;
+	private Player player;
 	private JLabel playerName, playerTotal, playerMoney, currentBet;
 	private JLabel deckSize;
 	private GridBagConstraints gbc_playerTotal, gbc_size,
 		gbc_playerName, gbc_playerMoney, gbc_currentBet;
 	
-	public InfoPanel()
+	public InfoPanel(Player player, Blackjack game)
 	{
 		super();
+		this.player = player;
+		this.game = game;
 		setOpaque(false);
 		setBorder(new EmptyBorder(10, 10, 10, 10));
 		setLayout(new GridBagLayout());
@@ -60,13 +63,13 @@ public class InfoPanel extends JPanel
 		gbc_deck.gridy = 0;
 		
 		gbc_playerName = new GridBagConstraints();
-		playerName= new JLabel("NAME ");
+		playerName= new JLabel(player.getName() + " ");
 		gbc_playerName.fill = GridBagConstraints.HORIZONTAL;
 		gbc_playerName.gridx = 1;
 		gbc_playerName.gridy = 0;
 		
 		gbc_playerMoney = new GridBagConstraints();
-		playerMoney = new JLabel("0 ");
+		playerMoney = new JLabel(player.getMoney() + " ");
 		gbc_playerMoney.fill = GridBagConstraints.HORIZONTAL;
 		gbc_playerMoney.gridx = 3;
 		gbc_playerMoney.gridy = 0;
@@ -104,29 +107,40 @@ public class InfoPanel extends JPanel
 		repaint();
 	}
 	
-	public void updateTotal(Player player)
+	public void updateTotal()
 	{
 		remove(playerTotal);
-		int playerTotal = 0;
-		for (int i = 0; i < player.getHand().size(); i++)
-		{
-			playerTotal += player.getHand().get(i).getValue();
-		}
-		this.playerTotal = new JLabel(""+playerTotal+ " ");
-		add(this.playerTotal, gbc_playerTotal);
+		playerTotal = new JLabel(""+player.getTotal()+ " ");
+		add(playerTotal, gbc_playerTotal);
 	}
 	
 	public void updateSize(Deck deck)
 	{
 		remove(deckSize);
-		deckSize = new JLabel(""+deck.getDeck().size()+ " ");
+		deckSize = new JLabel(deck.getDeck().size()+ " ");
 		add(deckSize, gbc_size);
 	}
 	
-	public void update(Deck deck, Player player)
+	public void updateMoney()
 	{
-		updateTotal(player);
+		remove(playerMoney);
+		playerMoney = new JLabel(player.getMoney()+ " ");
+		add(playerMoney, gbc_playerMoney);
+	}
+	
+	public void updateBet()
+	{
+		remove(currentBet);
+		currentBet = new JLabel(game.getBet()+" ");
+		add(currentBet, gbc_currentBet);
+	}
+	
+	public void update(Deck deck)
+	{
+		updateTotal();
 		updateSize(deck);
+		updateMoney();
+		updateBet();
 		revalidate();
 		repaint();
 	}
